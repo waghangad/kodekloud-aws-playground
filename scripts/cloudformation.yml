@@ -15,14 +15,14 @@
         "BucketName": "tf-state-gen-bucket"
       }
     },
-    "LockDBTable"{
+    "LockDBTable":{
       "Type" : "AWS::DynamoDB::Table",
         "Properties" : {
         "KeySchema" : [ {
-          "AttributeName" : 'LockID',
-          "KeyType" : HASH
+          "AttributeName" : "LockID",
+          "KeyType" : "HASH"
         }],
-        "TableName" : 'tf.lockk'
+        "TableName" : "tf.lock"
       }
     }
   }

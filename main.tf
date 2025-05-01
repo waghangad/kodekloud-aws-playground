@@ -1,7 +1,7 @@
 
 terraform {
   backend "s3" {
-    bucket         = "tf-state-987654328"
+    bucket         = "tf-state-gen-bucket"
     key            = "terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "tf.lock"

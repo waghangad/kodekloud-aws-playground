@@ -22,6 +22,11 @@ jobs:
           aws-access-key-id: ${{ vars.ACCESS_KEY }}
           aws-region: us-east-1
           aws-secret-access-key: ${{ secrets.SECRET_KEY }}
+      
+      - name: Create EKS Cluster
+        run: |
+          cd eks
+          source check-environment.sh
 
       - name: Terraform Init
         run: terraform init

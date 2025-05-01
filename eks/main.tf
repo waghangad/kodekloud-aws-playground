@@ -4,6 +4,15 @@
 #
 ####################################################################
 
+terraform {
+  backend "s3" {
+    bucket         = "tf-state-987654328"
+    key            = "terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "tf.lock"
+  }
+}
+
 variable "aws_region" {
   type    = string
   default = "us-east-1"
@@ -11,11 +20,6 @@ variable "aws_region" {
 
 provider "aws" {
   region = var.aws_region
-  #   default_tags {
-  #     tags = {
-  #       "kubernetes.io/cluster/demo-eks" = "owned"
-  #     }
-  #   }
 }
 
 output "NodeInstanceRole" {

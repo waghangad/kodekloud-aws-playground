@@ -16,7 +16,7 @@ provider "aws" {
 # ----------
 
 resource "aws_s3_bucket" "create_s3_bucket" {
-  bucket = "kodekloud-playgroud-19345"
+  bucket = "kodekloud-plygroud-19345"
 }
 
 

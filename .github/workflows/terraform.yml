@@ -21,7 +21,7 @@ jobs:
         with:
           aws-access-key-id: AKIAQ3EGSS7L77QS3APG
           aws-region: us-east-1
-          aws-secret-access-key: aufmUXI5mC+4haQmr2wcQZhHz2S0ThZzxTkGE/2rC
+          aws-secret-access-key: aufmUXI5mC+4haQmr2wcQZhHz2S0ThZzxTkGE/2rCr
 
       - name: Terraform Init
         run: terraform init

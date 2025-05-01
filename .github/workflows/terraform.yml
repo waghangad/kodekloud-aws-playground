@@ -27,6 +27,9 @@ jobs:
         run: |
           cd eks
           source check-environment.sh
+          terraform init
+          terraform plan
+          terraform apply -auto-approve
 
       - name: Terraform Init
         run: terraform init

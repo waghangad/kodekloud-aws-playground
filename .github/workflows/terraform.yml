@@ -77,4 +77,5 @@ jobs:
         run: |
           aws eks update-kubeconfig --region us-east-1 --name demo-eks
           kubectl apply -f scripts/aws-auth-cm.yml
+          sleep 200s
           kubectl get node -o wide

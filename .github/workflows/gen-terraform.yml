@@ -1,4 +1,4 @@
-name: General Terraform
+name: Gen Terraform
 on: 
     - workflow_dispatch
     - push

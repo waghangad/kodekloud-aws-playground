@@ -56,11 +56,6 @@ resource "aws_iam_role_policy_attachment" "eksClusterRole_AmazonEKSBlockStorageP
   role       = aws_iam_role.eksClusterRole.name
 }
 
-resource "aws_iam_role_policy_attachment" "eksClusterRole_AmazonEKSClusterPolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = aws_iam_role.eksClusterRole.name
-}
-
 resource "aws_iam_role_policy_attachment" "eksClusterRole_AmazonEKSComputePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSComputePolicy"
   role       = aws_iam_role.eksClusterRole.name

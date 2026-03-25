@@ -1,4 +1,4 @@
-name: Gen Terraform
+name: Create AWS Resources
 on: 
 - workflow_dispatch
 permissions:

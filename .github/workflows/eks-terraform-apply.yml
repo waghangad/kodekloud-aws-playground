@@ -1,4 +1,4 @@
-name: EKS Terraform
+name: Create EKS Cluster
 on: 
 - workflow_dispatch
 

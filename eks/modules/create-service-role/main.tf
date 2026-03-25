@@ -51,26 +51,6 @@ resource "aws_iam_role_policy_attachment" "eksClusterRole_AmazonEKSVPCResourceCo
   role       = aws_iam_role.eksClusterRole.name
 }
 
-resource "aws_iam_role_policy_attachment" "eksClusterRole_AmazonEKSBlockStoragePolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSBlockStoragePolicy"
-  role       = aws_iam_role.eksClusterRole.name
-}
-
-resource "aws_iam_role_policy_attachment" "eksClusterRole_AmazonEKSComputePolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSComputePolicy"
-  role       = aws_iam_role.eksClusterRole.name
-}
-
-resource "aws_iam_role_policy_attachment" "eksClusterRole_AmazonEKSLoadBalancingPolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSLoadBalancingPolicy"
-  role       = aws_iam_role.eksClusterRole.name
-}
-
-resource "aws_iam_role_policy_attachment" "eksClusterRole_AmazonEKSNetworkingPolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSNetworkingPolicy"
-  role       = aws_iam_role.eksClusterRole.name
-}
-
 output "eksClusterRole_arn" {
   value = aws_iam_role.eksClusterRole.arn
 }

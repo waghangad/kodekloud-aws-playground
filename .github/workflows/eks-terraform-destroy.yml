@@ -26,4 +26,5 @@ jobs:
       - name: Create EKS Cluster
         run: |
           cd eks
+          terraform init
           terraform destroy -auto-approve

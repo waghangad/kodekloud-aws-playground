@@ -1,28 +1,41 @@
 {
-  "AWSTemplateFormatVersion" : "2010-09-09",
-  "Description" : "Template to create S3 bucket.",
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Template to create namespaced S3 buckets and DynamoDB table for Terraform state locking.",
 
-  "Resources" : {
-    "EKSBucket":{
+  "Resources": {
+    "EKSBucket": {
       "Type": "AWS::S3::Bucket",
-      "Properties" : {
-        "BucketName": "tf-state-eks-bucket"
+      "Properties": {
+        "BucketName": {
+          "Fn::Sub": "tf-state-eks-bucket-${AWS::AccountId}-${AWS::Region}"
+        }
       }
     },
-    "GenBucket":{
+    "GenBucket": {
       "Type": "AWS::S3::Bucket",
-      "Properties" : {
-        "BucketName": "tf-state-gen-bucket"
+      "Properties": {
+        "BucketName": {
+          "Fn::Sub": "tf-state-gen-bucket-${AWS::AccountId}-${AWS::Region}"
+        }
       }
     },
-    "LockDBTable":{
-      "Type" : "AWS::DynamoDB::Table",
-        "Properties" : {
-        "KeySchema" : [ {
-          "AttributeName" : "LockID",
-          "KeyType" : "HASH"
-        }],
-        "TableName" : "tf.lock"
+    "LockDBTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "tf.lock",
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "LockID",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "LockID",
+            "KeyType": "HASH"
+          }
+        ]
       }
     }
   }

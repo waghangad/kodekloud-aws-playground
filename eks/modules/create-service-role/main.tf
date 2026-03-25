@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "assume_role_eks" {
       identifiers = ["eks.amazonaws.com"]
     }
 
-    actions = ["sts:AssumeRole"]
+    actions = ["sts:AssumeRole","sts:TagSession"]
   }
 }
 
@@ -48,6 +48,31 @@ resource "aws_iam_role_policy_attachment" "eksClusterRole_additional_policies" {
 # Reference: https://docs.aws.amazon.com/eks/latest/userguide/security-groups-for-pods.html
 resource "aws_iam_role_policy_attachment" "eksClusterRole_AmazonEKSVPCResourceController" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
+  role       = aws_iam_role.eksClusterRole.name
+}
+
+resource "aws_iam_role_policy_attachment" "eksClusterRole_AmazonEKSBlockStoragePolicy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSBlockStoragePolicy"
+  role       = aws_iam_role.eksClusterRole.name
+}
+
+resource "aws_iam_role_policy_attachment" "eksClusterRole_AmazonEKSClusterPolicy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+  role       = aws_iam_role.eksClusterRole.name
+}
+
+resource "aws_iam_role_policy_attachment" "eksClusterRole_AmazonEKSComputePolicy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSComputePolicy"
+  role       = aws_iam_role.eksClusterRole.name
+}
+
+resource "aws_iam_role_policy_attachment" "eksClusterRole_AmazonEKSLoadBalancingPolicy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSLoadBalancingPolicy"
+  role       = aws_iam_role.eksClusterRole.name
+}
+
+resource "aws_iam_role_policy_attachment" "eksClusterRole_AmazonEKSNetworkingPolicy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSNetworkingPolicy"
   role       = aws_iam_role.eksClusterRole.name
 }
 

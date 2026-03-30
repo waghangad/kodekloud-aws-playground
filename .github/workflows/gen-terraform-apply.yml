@@ -23,7 +23,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.SECRET_KEY }}
       
       - name: Terraform Init
-        run: terraform init
+        run: |
+          cd gen
+          terraform init
 
       - name: Terraform Plan
         run: terraform plan

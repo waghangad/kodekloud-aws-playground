@@ -87,10 +87,11 @@ eksctl create iamserviceaccount \
 ## 3. Install Karpenter via Helm
   Add the Karpenter Helm repo and install:
 
-`helm repo add karpenter https://charts.karpenter.sh`
-`helm repo update`
-
 ```bash
+helm repo add karpenter https://charts.karpenter.sh
+
+helm repo update
+
 helm install karpenter karpenter/karpenter \
   --namespace karpenter \
   --create-namespace \
@@ -128,14 +129,16 @@ spec:
     name: default
 ```
 
-`kubectl apply -f provisioner.yaml`
+```bash
+kubectl apply -f provisioner.yaml
+```
 
 ---
 
 ### ⚠️ Risks & Considerations
-- IAM Permissions: Ensure the role has correct policies; missing permissions will block node provisioning.
-- Instance Quotas: Karpenter may fail if your AWS account has EC2 limits.
-- Cluster Autoscaler: Do not run both Cluster Autoscaler and Karpenter together.
+- **IAM Permissions**: Ensure the role has correct policies; missing permissions will block node provisioning.
+- **Instance Quotas**: Karpenter may fail if your AWS account has EC2 limits.
+- **Cluster Autoscaler**: Do not run both Cluster Autoscaler and Karpenter together.
 
 ---
 

@@ -29,8 +29,7 @@ jobs:
           source check-environment.sh
           terraform init
           terraform plan
-          terraform destroy -auto-approve
-          # terraform apply -auto-approve
+          terraform apply -auto-approve
 
   EKS_Node_Group:
     runs-on: ubuntu-latest

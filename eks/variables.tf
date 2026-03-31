@@ -45,12 +45,12 @@ variable "additional_policy_name" {
 variable "node_group_desired_capacity" {
   type        = number
   description = "Desired capacity of Node Group ASG."
-  default     = 3
+  default     = 1
 }
 variable "node_group_max_size" {
   type        = number
   description = "Maximum size of Node Group ASG. Set to at least 1 greater than node_group_desired_capacity."
-  default     = 4
+  default     = 2
 }
 
 variable "node_group_min_size" {

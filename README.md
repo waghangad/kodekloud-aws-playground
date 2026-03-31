@@ -1,18 +1,9 @@
 # kodekloud-aws-playground
 
 1. Once AWS Playground account is ready, create Access Key and Secrete Access Key.
-2. Create S3 buckets and DynamoDB tables.
-   Bucket Name:  tf-state-eks-bucket-321
-   Bucket Name:  tf-state-gen-bucket-321
-   DynamoDB Table Name:  tf.lock
-   Partition Key: LockID
-
-  aws s3api create-bucket --bucket tf-state-eks-bucket-321 --region us-east-1
-
-  aws s3api create-bucket --bucket tf-state-gen-bucket-321 --region us-east-1
-
-  aws dynamodb create-table --table-name tf.lock --attribute-definitions AttributeName=LockID,AttributeType=S --key-schema AttributeName=LockID,KeyType=HASH --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
-
-
-3. To connect EKS cluster from CLI 
-   aws eks update-kubeconfig --region us-east-1 --name demo-eks
+2. Create AWS S3 bucket to store Terraform state file and AWS DynamoDB table for lock.
+3. Use AWS CloudFormation template present at path `scripts/cloudformation.yml` to create S3 bucket and DynamoDB table.
+4. Update new AWS Account ID in `scripts/aws-auth-cm.yml`
+5. Trigger Create EKS Cluster workflow from GitHub Actions Workflow Distpatch.
+6. Once EKS cluster and Node Group created.To connect EKS cluster from CLI use below command.
+   `aws eks update-kubeconfig --region us-east-1 --name demo-eks`

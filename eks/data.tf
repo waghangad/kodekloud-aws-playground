@@ -36,6 +36,6 @@ data "aws_subnets" "public" {
 
 # Get AMI ID for latest recommended Amazon Linux 2 image
 data "aws_ssm_parameter" "node_ami" {
-  # name = "/aws/service/eks/optimized-ami/1.31/amazon-linux-2/recommended/image_id"
-  name = "/aws/service/eks/optimized-ami/1.35/amazon-linux-2023/x86_64/standard/recommended/image_id"
+  name = "/aws/service/eks/optimized-ami/1.31/amazon-linux-2/recommended/image_id"
+  # name = "/aws/service/eks/optimized-ami/1.35/amazon-linux-2023/x86_64/standard/recommended/image_id"
 }

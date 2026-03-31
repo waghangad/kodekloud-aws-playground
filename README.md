@@ -46,32 +46,28 @@ This repository provides automation scripts and workflows to set up an AWS Playg
    - This updates your kubeconfig file so you can interact with the cluster using `kubectl`.
 
 ---
+# 🛠 Step-by-Step Installation Guide for Karpenter
 
-## 📂 Repository Structure
+This guide explains how to install and configure **Karpenter** on an AWS EKS cluster to enable dynamic node provisioning.
 
+---
 
+## 1. Prerequisites
+- An existing **EKS cluster** (v1.27+ recommended).
+- `kubectl` and **AWS CLI** configured.
+- **Helm** installed locally.
+- OIDC provider enabled for your cluster:
 
-
-🛠 Step-by-Step Installation Guide for Karpenter
-
-1. Prerequisites
-An existing EKS cluster (v1.27+ recommended).
-
-kubectl and AWS CLI configured.
-
-Helm installed locally.
-
-OIDC provider enabled for your cluster.
-
-bash
+```bash
 eksctl utils associate-iam-oidc-provider \
   --cluster <your-cluster-name> \
   --region <your-region> \
   --approve
-2. Create IAM Role for Karpenter
+
+## 2. Create IAM Role for Karpenter
 Karpenter requires permissions to launch EC2 instances.
 
-bash
+```bash
 eksctl create iamserviceaccount \
   --cluster <your-cluster-name> \
   --region <your-region> \
@@ -81,61 +77,3 @@ eksctl create iamserviceaccount \
   --attach-policy-arn arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy \
   --attach-policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly \
   --approve
-3. Install Karpenter via Helm
-Add the Karpenter Helm repo and install:
-
-bash
-helm repo add karpenter https://charts.karpenter.sh
-helm repo update
-
-helm install karpenter karpenter/karpenter \
-  --namespace karpenter \
-  --create-namespace \
-  --set serviceAccount.create=false \
-  --set serviceAccount.name=karpenter \
-  --set clusterName=<your-cluster-name> \
-  --set clusterEndpoint=$(aws eks describe-cluster \
-      --name <your-cluster-name> \
-      --region <your-region> \
-      --query "cluster.endpoint" \
-      --output text) \
-  --set aws.defaultInstanceProfile=KarpenterNodeInstanceProfile-<your-cluster-name>
-4. Define Provisioner and NodeClass
-Karpenter uses Provisioner and EC2NodeClass CRDs to define scaling behavior.
-
-Example provisioner.yaml:
-
-yaml
-apiVersion: karpenter.sh/v1alpha5
-kind: Provisioner
-metadata:
-  name: default
-spec:
-  requirements:
-    - key: "karpenter.k8s.aws/instance-family"
-      operator: In
-      values: ["m5", "c5"]
-  limits:
-    resources:
-      cpu: 1000
-  providerRef:
-    name: default
-Apply it:
-
-bash
-kubectl apply -f provisioner.yaml
-⚠️ Risks & Considerations
-IAM Permissions: Ensure the role has correct policies; missing permissions will block node provisioning.
-
-Instance Quotas: Karpenter may fail if your AWS account has EC2 limits.
-
-Cluster Autoscaler: Do not run both Cluster Autoscaler and Karpenter together.
-
-✅ Summary
-Enable OIDC and create IAM roles.
-
-Install Karpenter via Helm.
-
-Define Provisioner and NodeClass to control scaling.
-
-Karpenter will now automatically launch right-sized EC2 nodes when pods are unschedulable.

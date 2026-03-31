@@ -64,6 +64,8 @@ eksctl utils associate-iam-oidc-provider \
   --region <your-region> \
   --approve
 
+---
+
 ## 2. Create IAM Role for Karpenter
 Karpenter requires permissions to launch EC2 instances.
 

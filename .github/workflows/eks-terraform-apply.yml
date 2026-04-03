@@ -9,7 +9,7 @@ permissions:
 jobs:
   EKS_Node_Group:
     runs-on: ubuntu-latest
-    needs: Create_EKS_Cluster
+    # needs: Create_EKS_Cluster
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -28,7 +28,7 @@ jobs:
           envsubst < scripts/aws-auth-cm.yml | kubectl apply -f -
           sleep 120s
           kubectl get node -o wide
-          
+
   # Create_EKS_Cluster:
   #   runs-on: ubuntu-latest
   #   steps:

@@ -7,29 +7,29 @@ permissions:
   contents: read
 
 jobs:
-  Create_EKS_Cluster:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+  # Create_EKS_Cluster:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v4
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+  #     - name: Setup Terraform
+  #       uses: hashicorp/setup-terraform@v3
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.ACCESS_KEY }}
-          aws-region: us-east-1
-          aws-secret-access-key: ${{ secrets.SECRET_KEY }}
+  #     - name: Configure AWS Credentials
+  #       uses: aws-actions/configure-aws-credentials@v4
+  #       with:
+  #         aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+  #         aws-region: us-east-1
+  #         aws-secret-access-key: ${{ secrets.SECRET_KEY }}
       
-      - name: Create EKS Cluster
-        run: |
-          cd eks
-          source check-environment.sh
-          terraform init
-          terraform plan
-          terraform apply -auto-approve
+  #     - name: Create EKS Cluster
+  #       run: |
+  #         cd eks
+  #         source check-environment.sh
+  #         terraform init
+  #         terraform plan
+  #         terraform apply -auto-approve
 
   EKS_Node_Group:
     runs-on: ubuntu-latest

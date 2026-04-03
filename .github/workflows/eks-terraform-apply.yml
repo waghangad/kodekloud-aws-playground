@@ -30,7 +30,6 @@ jobs:
   #         terraform init
   #         terraform plan
   #         terraform apply -auto-approve
-
   EKS_Node_Group:
     runs-on: ubuntu-latest
     needs: Create_EKS_Cluster
